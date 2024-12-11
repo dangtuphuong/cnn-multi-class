@@ -20,9 +20,13 @@ cd cnn-multi-class
 ### Set Up a Virtual Environment and Install Dependencies for Mac:
 
 ```bash
-cd server
-
 python -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
+```
+
+## Running the Application
+
+```bash
+python app.py
 ```
