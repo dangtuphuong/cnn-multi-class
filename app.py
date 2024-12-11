@@ -2,6 +2,8 @@ import numpy as np
 import tensorflow as tf
 import os
 
+# from sklearn.metrics import confusion_matrix
+
 
 # Load the training and test sets
 def load_data(
@@ -68,17 +70,49 @@ def train_cnn(cnn, train_set, test_set, epochs=20):
 
 
 # Print training results
-def evaluate_training(history):
+def print_training_results(history):
     acc = history.history["accuracy"]
     val_acc = history.history["val_accuracy"]
     loss = history.history["loss"]
     val_loss = history.history["val_loss"]
 
-    print("\nTraining Results:")
-    print(f"Final Training Accuracy: {acc[-1]:.4f}")
-    print(f"Final Validation Accuracy: {val_acc[-1]:.4f}")
-    print(f"Final Training Loss: {loss[-1]:.4f}")
-    print(f"Final Validation Loss: {val_loss[-1]:.4f}")
+    print("\nTraining Summary:")
+    print(
+        f"{'Epoch':<20}{'Train Accuracy':<20}{'Val Accuracy':<20}{'Train Loss':<20}{'Val Loss':<20}"
+    )
+    print(f"{'-' * 85}")
+
+    for epoch in range(len(acc)):
+        print(
+            f"{epoch+1:<5}{acc[epoch]:<20.4f}{val_acc[epoch]:<20.4f}{loss[epoch]:<20.4f}{val_loss[epoch]:<20.4f}"
+        )
+
+
+# Make predictions on the test set
+# def evaluate_model(cnn, test_set, class_names):
+#     y_true = []
+#     y_pred = []
+
+#     for images, labels in test_set:
+#         y_true.extend(np.argmax(labels, axis=1))  # True labels
+#         preds = cnn.predict(images)
+#         y_pred.extend(np.argmax(preds, axis=1))  # Predicted labels
+
+#     # Generate confusion matrix
+#     cm = confusion_matrix(y_true, y_pred)
+
+#     # Print confusion matrix
+#     print("\nConfusion Matrix:")
+#     print(f"{'':<15}", end="")
+#     for label in class_names:
+#         print(f"{label:<15}", end="")
+#     print()
+
+#     for i, row in enumerate(cm):
+#         print(f"{class_names[i]:<15}", end="")
+#         for value in row:
+#             print(f"{value:<15}", end="")
+#         print()
 
 
 def make_prediction(cnn, img_path, class_names):
@@ -130,8 +164,11 @@ def main():
     # Train the CNN
     history = train_cnn(cnn, train_set, test_set, epochs=epochs)
 
-    # Evaluate training results
-    evaluate_training(history)
+    # Print training results
+    print_training_results(history)
+
+    # Evaluate model with confusion matrix
+    # evaluate_model(cnn, test_set, class_names=train_set.class_names)
 
     # Ask for the full path to the prediction image after training is complete
     predict_image_path = input(
