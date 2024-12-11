@@ -2,11 +2,11 @@
 
 An image classification model using Convolutional Neural Networks (CNNs) built with TensorFlow and Keras. The model can be trained to classify images into multiple categories. It includes data augmentation and preprocessing techniques to improve model generalization. After training, the model can also be used to predict the class of a single image.
 
-#### Requirements
+### Requirements
 
-TensorFlow: For building and training the CNN model.
-NumPy: For array handling and data manipulation.
-scikit-learn: For calculating the confusion matrix.
+- TensorFlow: For building and training the CNN model.
+- NumPy: For array handling and data manipulation.
+- scikit-learn: For calculating the confusion matrix.
 
 ## Installation
 
