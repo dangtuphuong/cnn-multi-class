@@ -84,7 +84,7 @@ def print_training_results(history):
 
     for epoch in range(len(acc)):
         print(
-            f"{epoch+1:<5}{acc[epoch]:<20.4f}{val_acc[epoch]:<20.4f}{loss[epoch]:<20.4f}{val_loss[epoch]:<20.4f}"
+            f"{epoch+1:<20}{acc[epoch]:<20.4f}{val_acc[epoch]:<20.4f}{loss[epoch]:<20.4f}{val_loss[epoch]:<20.4f}"
         )
 
 
